@@ -106,17 +106,14 @@ const Hero = () => {
             </button>
 
             <div className="relative w-full max-w-5xl aspect-video bg-gray-900 justify-center rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col items-center">
-              <Play className="w-20 h-20 text-emerald-500 mb-6" fill="currentColor" />
-              <h2 className="text-2xl md:text-3xl text-white font-bold mb-4">{t.hero.watchTrailer}</h2>
-              <p className="text-gray-300 text-center max-w-lg mb-8">
-                [VIDEO PLACEHOLDER] <br />
-                Embed your 1-minute 360°/Cinematic Trailer here. <br />
-                Includes: Bozjyra, Torysh, Sherkala, Caspian coast/Aktau, and sandy dunes.
-              </p>
-
-              <div className="absolute bottom-0 w-full h-1 bg-white/10">
-                <div className="h-full bg-emerald-500 w-1/3 animate-pulse" />
-              </div>
+              <video
+                controls
+                autoPlay
+                className="w-full h-full object-contain"
+                src="/videos/trailer.mp4"
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </motion.div>
         )}

@@ -61,7 +61,10 @@ const tours = {
     source: 'custom' as any,
     googleMapsUrl: 'https://www.google.com/maps/place/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA+%D0%9C%D0%B0%D1%8F%D0%BA/@43.6496352,51.1425815,3a,75y,304.42h,85.21t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDGyLmarwE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FAFfmt2bStzvlEQsJ2bVfBfxHN_XbDXerjha8xVB93dzxL4UCcs7J9fi2XSDDUhyy2HurdyxDO5XMEyfjd3CWqCHn2ITr0mY7_HRG4KCihvAH1H5ik3Kws4t524R32Ctmq_YRDQOlLgKLaA%3Dw900-h600-k-no-pi4.785527891979157-ya304.4156451440183-ro0-fo100!7i6080!8i3040!4m7!3m6!1s0x41b431448307c07b:0xa0944080c514d662!8m2!3d43.6496352!4d51.1425815!10e5!16s%2Fg%2F11g8zynq1f?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D',
     image: '/tours/caspian_custom_pano.jpg',
-    thumb: '/tours/caspian_custom_pano.jpg'
+    thumb: '/tours/caspian_custom_pano.jpg',
+    haov: 240,
+    vaov: 60,
+    vOffset: 0
   },
   aktau: {
     id: 'aktau',
