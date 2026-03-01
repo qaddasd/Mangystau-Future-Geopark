@@ -15,10 +15,13 @@ interface PannellumViewerProps {
   iframeUrl?: string;
   fallbackIframeUrl?: string;
   googleMapsUrl?: string;
-  source?: 'airpano' | 'google' | '360cities';
+  source?: 'airpano' | 'google' | '360cities' | 'custom';
+  haov?: number;
+  vaov?: number;
+  vOffset?: number;
 }
 
-export default function PannellumViewer({ image, title, iframeUrl, fallbackIframeUrl, googleMapsUrl, source }: PannellumViewerProps) {
+export default function PannellumViewer({ image, title, iframeUrl, fallbackIframeUrl, googleMapsUrl, source, haov, vaov, vOffset }: PannellumViewerProps) {
   const [showOverlay, setShowOverlay] = useState(true);
   const [currentUrl, setCurrentUrl] = useState(iframeUrl);
   const [iframeError, setIframeError] = useState(false);
@@ -140,6 +143,9 @@ export default function PannellumViewer({ image, title, iframeUrl, fallbackIfram
           pitch={10}
           yaw={180}
           hfov={110}
+          haov={haov || 360}
+          vaov={vaov || 180}
+          vOffset={vOffset || 0}
           autoLoad
           onLoad={() => {
             console.log("panorama loaded");

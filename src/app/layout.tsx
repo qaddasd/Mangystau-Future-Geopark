@@ -18,18 +18,22 @@ export const metadata: Metadata = {
   description: "Mangystau Future Geopark - Unique natural landscapes in 360° format",
 };
 
+import AIGuide from "@/components/AIGuide";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className="min-h-screen font-sans antialiased text-gray-900 bg-white"
       >
         <LanguageProvider>
           <div className="flex flex-col min-h-screen">
+            <AIGuide />
             {children}
           </div>
         </LanguageProvider>

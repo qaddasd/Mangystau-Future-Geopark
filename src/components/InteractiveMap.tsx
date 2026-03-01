@@ -43,6 +43,13 @@ const baseLocations = [
     lng: 53.380,
     image: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     type: 'photo'
+  },
+  {
+    id: 'aktau',
+    lat: 43.648,
+    lng: 51.171,
+    image: '/images/aktau-1.jpg',
+    type: 'photo'
   }
 ];
 
@@ -98,7 +105,9 @@ export default function InteractiveMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {baseLocations.map((loc) => {
-          const locData = t.map.locations[loc.id as keyof typeof t.map.locations];
+          // Fallback map data for Aktau using caspian dict details since they share info or Aktau isn't explicitly defined
+          const dictKey = loc.id === 'aktau' ? 'caspian' : loc.id as keyof typeof t.map.locations;
+          const locData = t.map.locations[dictKey];
           return (
             <Marker
               key={loc.id}
@@ -107,24 +116,52 @@ export default function InteractiveMap() {
             >
               <Popup className="custom-popup" maxWidth={400} minWidth={300}>
                 <div className="flex flex-col gap-2 p-1">
-                  <h3 className="font-bold text-sm mb-1">{locData.title}</h3>
-                  <div className="relative w-full h-[150px] mb-2 rounded overflow-hidden">
-                    <Image
-                      src={loc.image}
-                      alt={locData.title}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  </div>
+                  <h3 className="font-bold text-sm mb-1">{loc.id === 'aktau' ? t.shortInfo.items.aktau.title : locData.title}</h3>
+                  {loc.id === 'aktau' ? (
+                    <div className="grid grid-cols-2 gap-1 w-full h-[150px] mb-2 rounded overflow-hidden">
+                      <div className="relative w-full h-full col-span-2">
+                        <Image src="/images/aktau-1.jpg" alt={locData.title} fill className="object-cover" unoptimized />
+                      </div>
+                      <div className="relative w-full h-[70px]">
+                        <Image src="/images/aktau-2.jpg" alt={locData.title} fill className="object-cover" unoptimized />
+                      </div>
+                      <div className="relative w-full h-[70px]">
+                        <Image src="/images/aktau-3.jpg" alt={locData.title} fill className="object-cover" unoptimized />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative w-full h-[150px] mb-2 rounded overflow-hidden">
+                      <Image
+                        src={loc.image}
+                        alt={locData.title}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  )}
                   <p className="text-xs text-gray-700 mb-2">{locData.description}</p>
-                  <div className="text-sm">
+
+                  {locData.infographics && (
+                    <div className="bg-gray-50 border border-gray-100 rounded p-2 mb-2">
+                      <ul className="text-[11px] text-gray-600 space-y-1">
+                        {locData.infographics.map((info: string, idx: number) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-emerald-500 mr-1.5">•</span>
+                            {info}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="text-sm pt-2 mt-1 border-t border-gray-100">
                     <strong>{clickToViewText}</strong>
                     <Link
                       href={`/360photo/${loc.id}`}
-                      className="text-blue-600 hover:underline"
+                      className="text-blue-600 hover:underline cursor-pointer"
                     >
-                      {locData.title}
+                      {loc.id === 'aktau' ? t.shortInfo.items.aktau.title : locData.title}
                     </Link>
                   </div>
                 </div>

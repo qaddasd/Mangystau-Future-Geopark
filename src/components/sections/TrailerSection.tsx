@@ -26,19 +26,17 @@ const TrailerSection = () => {
                 {/* Video Player Placeholder */}
                 <div className="relative w-full max-w-5xl aspect-[21/9] bg-gray-900 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5 group ring-1 ring-white/10 hover:ring-emerald-500/50 transition-all duration-500">
 
-                    {/* Cover Image */}
-                    <div
-                        className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700 blur-[2px] group-hover:blur-0"
-                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542401886-65d6c61db217?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')" }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                    {/* Play Button */}
-                    <button className="absolute inset-0 flex items-center justify-center group/btn">
-                        <div className="flex items-center justify-center w-24 h-24 rounded-full bg-emerald-500/80 backdrop-blur-md text-white group-hover/btn:scale-110 group-hover/btn:bg-emerald-500 transition-all duration-300 shadow-[0_0_40px_rgba(16,185,129,0.4)]">
-                            <Play className="w-10 h-10 ml-2" fill="currentColor" />
-                        </div>
-                    </button>
+                    {/* Video Player */}
+                    <div className="absolute inset-0 bg-black">
+                        <video
+                            className="w-full h-full object-cover"
+                            controls
+                            poster="https://images.unsplash.com/photo-1542401886-65d6c61db217?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+                        >
+                            <source src="/videos/trailer.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
 
                     {/* Labels Overlay */}
                     <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-center gap-3">

@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation from '@/components/sections/Navigation';
 import PannellumViewer from '@/components/PannellumViewer';
+import LocationDetails from '@/components/LocationDetails';
+import Footer from '@/components/sections/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -55,10 +57,18 @@ const tours = {
   },
   caspian: {
     id: 'caspian',
-    title: 'Каспий жағалауы — Ақтау маңы (360°)',
+    title: 'Каспий жағалауы (360°)',
+    source: 'custom' as any,
+    googleMapsUrl: 'https://www.google.com/maps/place/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA+%D0%9C%D0%B0%D1%8F%D0%BA/@43.6496352,51.1425815,3a,75y,304.42h,85.21t/data=!3m8!1e1!3m6!1sCIHM0ogKEICAgIDGyLmarwE!2e10!3e11!6shttps:%2F%2Flh3.googleusercontent.com%2Fgpms-cs-s%2FAFfmt2bStzvlEQsJ2bVfBfxHN_XbDXerjha8xVB93dzxL4UCcs7J9fi2XSDDUhyy2HurdyxDO5XMEyfjd3CWqCHn2ITr0mY7_HRG4KCihvAH1H5ik3Kws4t524R32Ctmq_YRDQOlLgKLaA%3Dw900-h600-k-no-pi4.785527891979157-ya304.4156451440183-ro0-fo100!7i6080!8i3040!4m7!3m6!1s0x41b431448307c07b:0xa0944080c514d662!8m2!3d43.6496352!4d51.1425815!10e5!16s%2Fg%2F11g8zynq1f?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D',
+    image: '/tours/caspian_custom_pano.jpg',
+    thumb: '/tours/caspian_custom_pano.jpg'
+  },
+  aktau: {
+    id: 'aktau',
+    title: 'Ақтау қаласы — Каспий жауһары',
     source: 'google' as const,
-    image: '/tours/caspian.png',
-    thumb: '/tours/caspian.png'
+    image: '/images/aktau-1.jpg',
+    thumb: '/images/aktau-1.jpg'
   },
   aktolagay: {
     id: 'aktolagay',
@@ -89,16 +99,14 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
   const sourceBadge = sourceLabels[currentTour.source] || sourceLabels.airpano;
 
   return (
-    <main className="relative w-full h-screen overflow-hidden bg-black flex flex-col">
-      {/* Top Navigation */}
-      <div className="absolute top-0 left-0 right-0 z-50">
+    <main className="min-h-screen bg-[#f8fafc] flex flex-col pt-[80px]">
+      <div className="fixed top-0 left-0 right-0 z-[100] bg-white shadow-sm">
         <Navigation />
       </div>
 
-      {/* 360 Viewer */}
-      <div className="flex-1 w-full h-full relative">
-        {/* Source badge in top right */}
-        <div className="absolute top-[70px] right-[20px] z-40 pointer-events-none">
+      {/* Hero 360 Viewer Area */}
+      <div className="relative w-full h-[65vh] min-h-[500px] bg-black">
+        <div className="absolute top-[20px] right-[20px] z-40 pointer-events-none">
           <span className={`${sourceBadge.color} text-white text-xs px-3 py-1.5 rounded-full font-medium shadow-lg backdrop-blur-sm bg-opacity-80`}>
             📷 {sourceBadge.label}
           </span>
@@ -111,51 +119,47 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
           fallbackIframeUrl={(currentTour as any).fallbackIframeUrl}
           googleMapsUrl={(currentTour as any).googleMapsUrl}
           source={(currentTour as any).source}
+          haov={(currentTour as any).haov}
+          vaov={(currentTour as any).vaov}
+          vOffset={(currentTour as any).vOffset}
         />
-      </div>
 
-      {/* Bottom Carousel Container */}
-      <div className="absolute bottom-0 left-0 right-0 z-40 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
-        <div className="relative max-w-[1200px] mx-auto py-2 px-10 flex gap-2 overflow-x-auto no-scrollbar scroll-smooth">
-          {allToursList.map((tour) => (
-            <Link
-              key={tour.id}
-              href={`/360photo/${tour.id}`}
-              className={`flex-shrink-0 w-[140px] border-2 transition-all ${tour.id === currentTour.id ? 'border-[#5cb82c]' : 'border-transparent hover:border-gray-300'
-                }`}
-            >
-              <div className="relative w-full h-[70px]">
-                <Image
-                  src={tour.thumb}
-                  alt={tour.title}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
-              <div className="bg-white text-center p-1">
-                <span className="text-[10px] leading-tight line-clamp-2 text-gray-700">
-                  {tour.title}
-                </span>
-              </div>
-            </Link>
-          ))}
-
-          {/* Close / Hide Button placeholder (from screenshot) */}
-          <button className="absolute top-2 right-2 text-gray-400 hover:text-black">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-
-          {/* Scroll Right Arrow */}
-          <button className="absolute top-1/2 -translate-y-1/2 right-2 w-6 h-12 bg-black/50 text-white flex items-center justify-center hover:bg-black/70">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+        {/* Floating Bottom Tour Selector for the 360 viewer */}
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 z-40 bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl flex max-w-[90vw] overflow-hidden border border-gray-200">
+          <div className="flex overflow-x-auto no-scrollbar scroll-smooth p-2 gap-2">
+            {allToursList.map((tour) => (
+              <Link
+                key={tour.id}
+                href={`/360photo/${tour.id}`}
+                className={`flex-shrink-0 w-[120px] overflow-hidden rounded-xl border-2 transition-all ${tour.id === currentTour.id ? 'border-emerald-500 shadow-lg scale-100' : 'border-transparent hover:border-gray-200 scale-95 opacity-80 hover:opacity-100'
+                  }`}
+              >
+                <div className="relative w-full h-[60px]">
+                  <Image
+                    src={tour.thumb}
+                    alt={tour.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                </div>
+                <div className="bg-white text-center p-1">
+                  <span className="text-[9px] font-medium leading-tight line-clamp-2 text-gray-800">
+                    {tour.title}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Scrollable Detailed Info Content */}
+      <div className="flex-1 w-full max-w-6xl mx-auto px-4 pt-16 pb-12 z-10 relative">
+        <LocationDetails id={id} />
+      </div>
+
+      <Footer />
     </main>
   );
 }

@@ -42,6 +42,12 @@ const Navigation = () => {
           <Link href="/" className="text-gray-700 text-[15px] font-medium hover:text-emerald-600 transition-colors">
             {t.nav.home}
           </Link>
+          <Link href="/fauna" className="text-gray-700 text-[15px] font-medium hover:text-emerald-600 transition-colors">
+            {t.nav.fauna}
+          </Link>
+          <Link href="/game" className="text-gray-700 text-[15px] font-medium hover:text-emerald-600 transition-colors flex items-center gap-1">
+            🎮 {t.nav.game}
+          </Link>
           <Link href="/map" className="active:scale-95 bg-[#5cb82c] text-white hover:bg-[#4a9a20] text-[15px] font-medium py-2 px-5 rounded-full shadow-sm transition-all duration-300">
             {t.nav.map}
           </Link>
@@ -108,6 +114,12 @@ const Navigation = () => {
           <div className="flex flex-col space-y-2">
             <Link href="/" onClick={toggleMobileMenu} className="text-gray-700 text-lg font-medium py-3 px-4 rounded-xl hover:bg-gray-50 transition-colors">
               {t.nav.home}
+            </Link>
+            <Link href="/fauna" onClick={toggleMobileMenu} className="text-gray-700 text-lg font-medium py-3 px-4 rounded-xl hover:bg-gray-50 transition-colors">
+              {t.nav.fauna}
+            </Link>
+            <Link href="/game" onClick={toggleMobileMenu} className="text-gray-700 text-lg font-medium py-3 px-4 rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2">
+              🎮 {t.nav.game}
             </Link>
             <Link href="/map" onClick={toggleMobileMenu} className="text-white bg-[#5cb82c] text-center text-lg font-medium py-3 px-4 rounded-xl hover:bg-[#4a9a20] transition-colors mt-4 shadow-sm">
               {t.nav.map}
